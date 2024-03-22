@@ -1,0 +1,32 @@
+version: 2
+
+models:
+  - name: dbt_results
+    description: |
+      Run results of dbt invocations, inserted at the end of each invocation.
+      Each row is the invocation result of a single resource (model, test, snapshot, etc).
+      New data is loaded to this model on an on-run-end hook named 'hrelementary.on_run_end' from each invocation that produces a result object.
+      This is an incremental model.
+    columns:
+      - name: result_id
+        description: Id of the result
+      - name: invocation_id
+        description: Id of the invocation
+      - name: unique_id
+        description: Unique row id
+      - name: database_name
+        description: database
+      - name: schema_name
+        description: schema
+      - name: name
+        description: name
+      - name: resource_type
+        description: Resource type
+      - name: status
+        description: Finally status
+      - name: execution_time_seconds
+        description: Execution duration, s
+      - name: rows_affected
+        description: Rows affected, number
+      - name: dbt_run_at
+        description: Run at
