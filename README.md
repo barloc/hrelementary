@@ -9,7 +9,7 @@ Parse result of every dbt model invocation and put it to the dbt_results table. 
 ```yml packages.yml
 packages:
   - package: "https://github.com/barloc/hrelementary.git"
-    version: 0.0.1
+    version: 0.0.2
 ```
 
 2. Run `dbt deps`
