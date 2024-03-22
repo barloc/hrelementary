@@ -17,9 +17,9 @@
                        execution_time_seconds,
                        rows_affected,
                        dbt_run_at
-               ) values
+               )
                    {%- for parsed_result_dict in parsed_results -%}
-                       (
+                       select
                            '{{ parsed_result_dict.get('result_id') }}',
                            '{{ parsed_result_dict.get('invocation_id') }}',
                            '{{ parsed_result_dict.get('unique_id') }}',
@@ -31,7 +31,7 @@
                            {{ parsed_result_dict.get('execution_time_seconds') }},
                            {{ parsed_result_dict.get('rows_affected') }},
                            current_timestamp
-                       ) {{- "," if not loop.last else "" -}}
+                       {{- " union " if not loop.last else "" -}}
                    {%- endfor -%}
 
                 -- Adapter don't commit this code so commit here

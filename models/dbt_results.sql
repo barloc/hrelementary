@@ -2,6 +2,7 @@
     config(
         incremental_strategy = 'delete+insert',
         materialized = 'incremental',
+        order_by_string = 'schema_name,name,dbt_run_at',
         transient = False,
         unique_key = 'result_id',
     )
