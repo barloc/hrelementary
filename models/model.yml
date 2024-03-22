@@ -30,3 +30,5 @@ models:
         description: Rows affected, number
       - name: dbt_run_at
         description: Run at
+      - name: selector
+        description: Selector from args when execute

@@ -11,6 +11,7 @@
        {%- if not rows_affected -%}
            {% set rows_affected = 0 %}
        {%- endif -%}
+       {% set selector %}{{ invocation_args_dict.get('select', []) | join(',') }}{% endset %}
        {% set parsed_result_dict = {
                'result_id': invocation_id ~ '.' ~ node.get('unique_id'),
                'invocation_id': invocation_id,
@@ -21,10 +22,11 @@
                'resource_type': node.get('resource_type'),
                'status': run_result_dict.get('status'),
                'execution_time_seconds': run_result_dict.get('execution_time'),
-               'rows_affected': rows_affected
+               'rows_affected': rows_affected,
+               'selector': selector,
                }%}
        {% do parsed_results.append(parsed_result_dict) %}
-        {% print(parsed_result_dict) %}
+       {% print(parsed_result_dict) %}
    {% endfor %}
    {{ return(parsed_results) }}
 {% endmacro %}

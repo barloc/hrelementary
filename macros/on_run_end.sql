@@ -16,7 +16,8 @@
                        status,
                        execution_time_seconds,
                        rows_affected,
-                       dbt_run_at
+                       dbt_run_at,
+                       selector
                )
                    {%- for parsed_result_dict in parsed_results -%}
                        select
@@ -30,7 +31,8 @@
                            '{{ parsed_result_dict.get('status') }}',
                            {{ parsed_result_dict.get('execution_time_seconds') }},
                            {{ parsed_result_dict.get('rows_affected') }},
-                           current_timestamp
+                           current_timestamp,
+                           '{{ parsed_result_dict.get('selector') }}'
                        {{- " union " if not loop.last else "" -}}
                    {%- endfor -%}
 
